@@ -3,27 +3,82 @@
  */
 $(document).ready(function() {
 
-    //create Navbar (countries already set)
-    var menuOptions = ['England', 'France', 'Germany', 'Israel', 'USA'];
-    var navBar = $('<ul/>');
-    navBar.attr("id", "my-menu");
+    //set country array
+    var countries = [
+        {countryName: "Australia",
+        countryCode: "australia"},
+        {countryName: "Germany",
+            countryCode: "germany"},
+        {countryName: "England",
+            countryCode: "england"},
+        {countryName: "United States",
+            countryCode: "united states"}
+      ];
 
-    for (var i = 0; i < menuOptions.length; i++) {
-        var myItem = $('<li/>');
-        myItem.addClass('nav-option');
-        myItem.text(menuOptions[i]);
-        navBar.append(myItem);
+    //set category array
+    var categories = ["entertainment","finance","tech","business","religion","media","sports","health","travel"];
 
+
+    //function to create country buttons
+    function createCountry() {
+        var navBar = $('<ul/>');
+        navBar.attr("id", "country");
+        for (var i = 0; i < countries.length; i++) {
+            var myItem = $('<button/>');
+            myItem.addClass('nav-option').attr("id", countries[i].countryCode);
+            myItem.text(countries[i].countryName);
+            navBar.append(myItem);
+
+        }
+        $('.countries').append(navBar);
     }
-    $('.container').append(navBar);
 
-    //get news API
-    $.get("https://newsapi.org/v1/articles?source=techcrunch&apiKey=84c305e1594647be8a4ae3a9aa8addce",function(products) {  //result from server generated using myJson
-        $('body').removeClass('loading-state');
+    //function to create random bubbles
+    function createBubble(){
+        var numberOfBubble= 8;
+        for (var i = 0; i <numberOfBubble ; i++) {
+            var mybubble = $('<div/>');
+            var mybubblewrapper = $('<div/>');
+            var mybubbletext = $('<div/>');
+            mybubbletext.text("bubble"+i);
+            mybubble.addClass('bubble x1');
+            mybubblewrapper.addClass("bubblewrapper");
+            mybubble.css("background-color", "pink");
+            k=getRandomsize()
+            mybubble.css("width",k);
+            mybubble.css("height",k);
+            mybubble.css("vertical-align", "top");
+            mybubble.css("paddding-top", "50px");
+            mybubbletext.css("margin-top", "40%");
+            mybubble.append(mybubbletext);
+            mybubblewrapper.append(mybubble);
+            $('#bubble-container').append(mybubblewrapper);
 
-        console.log(products);
-    })
+        }
+        function getRandomsize() {
+            var size=Math.floor(Math.random()*100+200);
+            size=size+"px";
+            return size;
+        }
+    }
 
+    function countryClick(){
+        $(this).click(function(event){
+            var country = event.target.id;
+            $.get("http://webhose.io/filterWebContent?token=261e9791-7278-4dfe-9339-93049307257c&format=json&ts=1500548708366&sort=crawled&q=language%3Aenglish%20site_type%3Anews%20social.facebook.likes%3A%3E5000%20location%3A"+ country +"%20site_category%3Apolitics",function(products) {
+                console.log(products);
+            })
+
+        })
+    }
+
+
+
+countryClick();
+createCountry();
+createBubble();
 });
+
+
 
 
