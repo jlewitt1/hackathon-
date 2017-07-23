@@ -1,6 +1,7 @@
 body{
     text-align: center;
     height: 100%;
+    overflow-x: hidden;
 }
 .nav-option {
     display: inline-block;
@@ -9,4 +10,73 @@ body{
     margin: 20px;
     padding: 15px;
     border-radius: 15px;
+}
+body{
+    text-align: center;
+    margin: 0;
+}
+#bubble-container{
+    margin: 5%;
+    width:100%;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.bubblewrapper{
+    width:100%;
+    display: inline-block;
+}
+.bubble{
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    display: inline-block;
+    -webkit-box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+}
+
+
+
+.x1 {
+    -webkit-animation: animateBubble 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
+    -moz-animation: animateBubble 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
+    animation: animateBubble 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
+
+
+
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+    transform: scale(0.6);
+}
+
+
+@-webkit-keyframes sideWays {
+    0% {
+        margin-left:0px;
+    }
+    100% {
+        margin-left:5px;
+    }
+}
+
+@-moz-keyframes sideWays {
+    0% {
+        margin-left:0px;
+    }
+    100% {
+        margin-left:5px;
+    }
+}
+
+@keyframes sideWays {
+    0% {
+        margin-left:0px;
+    }
+    100% {
+        margin-left:5px;
+    }
 }
