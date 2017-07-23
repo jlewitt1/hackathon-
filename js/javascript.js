@@ -12,15 +12,19 @@ $(document).ready(function() {
             countryCode: "germany"},
         {countryName: "England",
             countryCode: "england"},
+        {countryName: "France",
+            countryCode: "france"},   
+        {countryName: "Israel",
+            countryCode: "israel"},    
         {countryName: "United States",
             countryCode: "usa"}
       ];
 
     var countrySelected = "usa";
-    var headerCategory = "";
 
     //set category array
-    var categories = ["entertainment","finance","tech","business","religion","media","sports","health","travel"];
+    var categories = ["entertainment","finance","tech","business","religion","media","sports","health","travel","education"];
+    var images = ['australia','germany','england','israel','france','usa'];
 
     //function to create country buttons
     function createCountry() {
@@ -29,7 +33,8 @@ $(document).ready(function() {
         for (var i = 0; i < countries.length; i++) {
             var myItem = $('<button/>');
             myItem.addClass('nav-option').attr("id", countries[i].countryCode);
-            myItem.text(countries[i].countryName);
+            myItem.css("background-size","cover").css("background-repeat","no-repeat").css('background-image',"url(./images/" + images[i] + ".png)");
+            //myItem.text(countries[i].countryName);
             navBar.append(myItem);
 
         }
@@ -43,13 +48,15 @@ $(document).ready(function() {
             var category = categories[i];
             window.setTimeout(function(category) {
                 console.log(category);
-                var headerTitle = $.get("http://webhose.io/filterWebContent?token=a23dc392-09bf-43d4-8250-2e5c956e5cce&format=json&ts=1500570230490&sort=crawled&q=location%3A"+countrySelected+"%20site_category%3A"+category, 
+                $.get("http://webhose.io/filterWebContent?token=a23dc392-09bf-43d4-8250-2e5c956e5cce&format=json&ts=1500570230490&sort=crawled&q=location%3A"+countrySelected+"%20site_category%3A"+category, 
                     function (data) {
                         console.log(data);
                         createBubble(data, category);
                 }); 
             }, 700*i, category);
-             $('body').removeClass('instructions');
+             window.setTimeout(function () { 
+                $('.instructions').hide();
+             },1000);
       }
     }
 
@@ -57,7 +64,7 @@ $(document).ready(function() {
     function createBubble(data, category){
             var mybubble = $('<div/>');
             var mybubblewrapper = $('<div/>');
-            var text = "<div class='title'>category<div/>";
+            var text = category;
             text += "<br /><div class='content'>";
                 for( var i = 0; i<3; i++){
                     var headerContent = data.posts[i].title;
@@ -70,14 +77,14 @@ $(document).ready(function() {
             mybubble.attr("id", category);
             mybubblewrapper.addClass("bubblewrapper col-md-2");
 
-            var size = setBubbleSize(data.totalResults);//todo: change size accroding to data.totalResults
+            var size = setBubbleSize(data.totalResults);
             mybubble.css({
                 width: size,
                 height: size,
-               // top: Math.floor(Math.random()*10),
                 paddingTop: "50px",
                 backgroundColor: "pink"
             });
+
             mybubblewrapper.append(mybubble);
 
             $('#bubble-container').append(mybubblewrapper);
@@ -86,25 +93,17 @@ $(document).ready(function() {
             $(".bubble").hover(function (event) {
             var bubble = $(event.target);
             bubble.css('z-index', counter+=1);
-            //console.log(bubble)
         });
     }
 
     //function to change values of selected country
     function countryClick(){
         $(".nav-option").click(function(event){
+            $('#bubbleContainer').empty();
             countrySelected = event.target.id;
             console.log(countrySelected);
             createBubbles(countrySelected);
         })
-    }
-    //set headers according to country
-    function setHeaders() {
-        $(".bubble").hover(function () {
-            var bubble = event.target;
-            console.log(bubblewrapper)
-        });
-        //setBubbleSize();
     }
 
     //set size of each bubble (min & max sizes)
@@ -113,9 +112,49 @@ $(document).ready(function() {
         return size>500?500:size;
    }
 
+    var activeWidth;
+    var activeHeight;
+    var activex;
+    var activey;
+    
+    function newsopen() {
+        $(".bubble").click(function (e) {
+            
+           var clickedBubble = $(e.target);
+           e.stopPropagation();
+           activeWidth=$(e.target).width();
+           activeHeight=$(e.target).height();
+           console.log(activeWidth);
+           
+           activex=$(e.target).position().left;
+           activey=$(e.target).position().top;           
+           var bubbleSize = Math.min($(window).width(), $(window).height());
+           clickedBubble.css({"width":bubbleSize,"height":bubbleSize,"z-index": "12345", "position":"fixed","left":"50%", "transform": "translateX(-50%)","top":"200px"});
+            
+            clickedBubble.removeClass("x1");
+            $(".bubble.x1").addClass("disabled");
+            $("#cover").css("display","block");
+        });
+    }
+
+    function newsclose() {
+        $("#cover").click(function (e) {
+              alert(activeHeight);
+            var activeBubble = $(".bubble").not(".disabled")
+            alert(activeBubble.text());
+            activeBubble.addClass("x1");
+            $(".disabled").removeClass("disabled");
+            $("#cover").css("display","none");
+            console.log(activeHeight);
+
+           activeBubble.css({"width":activeHeight+"px","height":activeHeight+"px","z-index": "none", "position":"inherit","left":activex+"px", "transform": "translateX(-50%)","top":activey+"px"});
+           });
+    }
+
     createCountry();
     countryClick();
-    setHeaders();
+    newsopen();
+    newsclose();
 });
 
 

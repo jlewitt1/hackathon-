@@ -3,6 +3,17 @@ body{
     height: 100%;
     overflow-x: hidden;
 }
+
+#cover{
+    background-color: gray;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display:none;
+    z-index: 1234;
+    opacity: 0.9;
+}
+
 .nav-option {
     display: inline-block;
     border: 1px solid black;
@@ -11,10 +22,7 @@ body{
     padding: 15px;
     border-radius: 15px;
 }
-body{
-    text-align: center;
-    margin: 0;
-}
+
 #bubble-container{
     width:100%;
     vertical-align: top;
@@ -23,6 +31,7 @@ body{
     width: 100%;
     height: 300px;
     margin: 5px;
+    border: 2px solid black;
 }
 .bubble{
     -webkit-border-radius: 50%;
@@ -32,6 +41,19 @@ body{
     -webkit-box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
     -moz-box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
+    transition: all 1s linear;
+    transform-origin: top left;
+}
+
+.bubble.disabled{
+    pointer-events: none;
+}
+
+.bubble.full-screen {   
+    z-index: 12345;
+    left:50%;
+    transform: translateX(-50%);
+    top:200px;
 }
 .x1 {
     -webkit-animation: animateBubble 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
@@ -42,12 +64,13 @@ body{
     transform: scale(0.6);
 }
 
- .loading-state { 
-    background-image:url('http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif');
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+button { 
+    width: 45px;
+}
 
+.container{
+    text-align: center;
+} 
 
 @-webkit-keyframes sideWays {
     0% {
@@ -75,3 +98,4 @@ body{
         margin-left:5px;
     }
 }
+
