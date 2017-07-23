@@ -21,7 +21,8 @@ body{
 }
 .bubblewrapper {
     width: 100%;
-    display: inline;
+    height: 300px;
+    margin: 5px;
 }
 .bubble{
     -webkit-border-radius: 50%;

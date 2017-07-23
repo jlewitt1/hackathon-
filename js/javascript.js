@@ -42,7 +42,7 @@ $(document).ready(function() {
             var mybubbletext = $('<div/>');
             mybubbletext.text("bubble"+i);
             mybubble.addClass('bubble x1');
-            mybubblewrapper.addClass("bubblewrapper");
+            mybubblewrapper.addClass("bubblewrapper col-md-2");
             mybubble.css("background-color", "pink");
             k=getRandomsize()
             mybubble.css("width",k);
@@ -56,7 +56,7 @@ $(document).ready(function() {
 
         }
         function getRandomsize() {
-            var size=Math.floor(Math.random()*100+200);
+            var size=Math.floor(Math.random()*300+250);
             size=size+"px";
             return size;
         }
