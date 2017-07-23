@@ -1,0 +1,12 @@
+body{
+    text-align: center;
+    height: 100%;
+}
+.nav-option {
+    display: inline-block;
+    border: 1px solid black;
+    font-size: 20px;
+    margin: 20px;
+    padding: 15px;
+    border-radius: 15px;
+}
