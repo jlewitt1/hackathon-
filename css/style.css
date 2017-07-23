@@ -2,7 +2,30 @@ body{
     text-align: center;
     height: 100%;
     overflow-x: hidden;
+    font-family: 'Chicle', cursive;
 }
+
+ .instructions { 
+    font-size: 25px;
+    border-bottom: 1px solid black;
+    background-color: rgba(0,0,0,.1);
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+ }
+
+ .row.top { 
+    background-color: rgba(0,0,0,.1);
+    border-top: 1px solid black;
+    margin-top: 1%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+
+  .row.countries { 
+    background-color: rgba(0,0,0,.1);
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+   }
 
 #cover{
     background-color: gray;
@@ -65,11 +88,13 @@ body{
 }
 
 button { 
-    width: 45px;
+    width: 55px;
+    height:40px;
 }
 
 .container{
     text-align: center;
+    background-color: rgba(0,0,0.3);
 } 
 
 @-webkit-keyframes sideWays {
@@ -96,6 +121,241 @@ button {
     }
     100% {
         margin-left:5px;
+    }
+}
+
+section#contact {
+    background-color: #222222;
+    background-image: url('http://artdnaswitchbd.com/componants/images/map-image.png');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+section {
+    padding: 30px 0PX;
+    /*margin-top: 200px;*/
+}
+section#contact .section-heading {
+    color: white;
+}
+section#contact .form-group {
+    margin-bottom: 25px;
+}
+section#contact .form-group input,
+section#contact .form-group textarea {
+    padding: 20px;
+}
+section#contact .form-group input.form-control {
+    height: auto;
+}
+section#contact .form-group textarea.form-control {
+    height: 236px;
+}
+section#contact .form-control:focus {
+    border-color: #fed136;
+    box-shadow: none;
+}
+section#contact ::-webkit-input-placeholder {
+    font-family: 'Chicle', cursive;    
+    text-transform: uppercase;
+    font-weight: 700;
+    color: black;
+}
+.gellary_bg_none img{
+    width: 100%;
+    height: 250px;
+}
+section#contact :-moz-placeholder {
+    /* Firefox 18- */
+    font-family: 'Chicle', cursive;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #eeeeee;
+}
+section#contact ::-moz-placeholder {
+    /* Firefox 19+ */
+    font-family: 'Chicle', cursive;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #eeeeee;
+}
+section#contact :-ms-input-placeholder {
+    font-family: 'Chicle', cursive;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #eeeeee;
+}
+section#contact .text-danger {
+    color: #e74c3c;
+}
+
+.about_our_company{
+    text-align: center;
+}
+.about_our_company h1{
+    font-size: 25px;
+}
+.titleline-icon {
+    position: relative;
+    max-width: 100px;
+    border-top: 4px double #F99700;
+    margin: 20px auto 20px;
+}
+.titleline-icon:after {
+    position: absolute;
+    top: -11px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-family: 'Chicle', cursive;
+    content: "\f141";
+    font-size: 20px;
+    line-height: 1;
+    color: #F99700;
+    text-align: center;
+    vertical-align: middle;
+    width: 40px;
+    height: 20px;
+    background: #ffffff;
+}
+
+.cssload-container {
+    width: 117px;
+    margin: 0 auto;
+}
+
+.cssload-circle-1 {
+    height: 117px;
+    width: 117px;
+    background: rgb(97,46,141);
+}
+
+.cssload-circle-2 {
+    height: 97px;
+    width: 97px;
+    background: rgb(194,34,134);
+}
+
+.cssload-circle-3 {
+    height: 78px;
+    width: 78px;
+    background: rgb(234,34,94);
+}
+
+.cssload-circle-4 {
+    height: 58px;
+    width: 58px;
+    background: rgb(237,91,53);
+}
+
+.cssload-circle-5 {
+    height: 39px;
+    width: 39px;
+    background: rgb(245,181,46);
+}
+
+.cssload-circle-6 {
+    height: 19px;
+    width: 19px;
+    background: rgb(129,197,64);
+}
+
+.cssload-circle-7 {
+    height: 10px;
+    width: 10px;
+    background: rgb(0,163,150);
+}
+
+.cssload-circle-8 {
+    height: 5px;
+    width: 5px;
+    background: rgb(22,116,188);
+}
+
+.cssload-circle-1,
+.cssload-circle-2,
+.cssload-circle-3,
+.cssload-circle-4,
+.cssload-circle-5,
+.cssload-circle-6,
+.cssload-circle-7,
+.cssload-circle-8 {
+    border-bottom: none;
+    border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    -o-box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    -ms-box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    animation-name: cssload-spin;
+    -o-animation-name: cssload-spin;
+    -ms-animation-name: cssload-spin;
+    -webkit-animation-name: cssload-spin;
+    -moz-animation-name: cssload-spin;
+    animation-duration: 4600ms;
+    -o-animation-duration: 4600ms;
+    -ms-animation-duration: 4600ms;
+    -webkit-animation-duration: 4600ms;
+    -moz-animation-duration: 4600ms;
+    animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -o-animation-timing-function: linear;
+    -ms-animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+}
+
+
+
+@keyframes cssload-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes cssload-spin {
+    from {
+        -o-transform: rotate(0deg);
+    }
+    to {
+        -o-transform: rotate(360deg);
+    }
+}
+
+@-ms-keyframes cssload-spin {
+    from {
+        -ms-transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes cssload-spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes cssload-spin {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
     }
 }
 

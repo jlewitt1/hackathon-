@@ -2,8 +2,7 @@
  * Created by hillarosenberg on 2017/07/23.
  */
 $(document).ready(function() {
-    var token = "a23dc392-09bf-43d4-8250-2e5c956e5cce";
-
+var token = "fd0eb5f5-5906-4a6c-a1ef-905a0a07e241";
     //set country array
     var countries = [
         {countryName: "Australia",
@@ -25,6 +24,7 @@ $(document).ready(function() {
     //set category array
     var categories = ["entertainment","finance","tech","business","religion","media","sports","health","travel","education"];
     var images = ['australia','germany','england','israel','france','usa'];
+    // var sideOptions = ['Theme', 'Font','Favorites']
 
     //function to create country buttons
     function createCountry() {
@@ -36,10 +36,23 @@ $(document).ready(function() {
             myItem.css("background-size","cover").css("background-repeat","no-repeat").css('background-image',"url(./images/" + images[i] + ".png)");
             //myItem.text(countries[i].countryName);
             navBar.append(myItem);
-
         }
         $('.countries').append(navBar);
     }
+
+    // function createSideBar () { 
+    //     var sideBar = $('<ul/>');
+    //     sideBar.attr('id', 'sidebar');
+
+    //     for (var i=0; i<sideOptions.length; i++) { 
+    //         var mySideItem = $('<button/>');
+    //         mySideItem.addClass('side-nav-option').attr('id',sideOptions[i]);
+    //         mySideItem.text(sideOptions[i]);
+
+    //         sideBar.append(mySideItem);
+    //     }
+    //     $('.container').append(sideBar)
+    // }
 
     //function to create random bubbles
     function createBubbles(country){
@@ -48,15 +61,15 @@ $(document).ready(function() {
             var category = categories[i];
             window.setTimeout(function(category) {
                 console.log(category);
-                $.get("http://webhose.io/filterWebContent?token=a23dc392-09bf-43d4-8250-2e5c956e5cce&format=json&ts=1500570230490&sort=crawled&q=location%3A"+countrySelected+"%20site_category%3A"+category, 
+                $.get("http://webhose.io/filterWebContent?token="+token+"&format=json&ts=1500570230490&sort=crawled&q=location%3A"+countrySelected+"%20site_category%3A"+category, 
                     function (data) {
                         console.log(data);
                         createBubble(data, category);
                 }); 
             }, 700*i, category);
-             window.setTimeout(function () { 
-                $('.instructions').hide();
-             },1000);
+             // window.setTimeout(function () { 
+             //    $('.instructions').hide();
+             // },1000);
       }
     }
 
@@ -99,11 +112,21 @@ $(document).ready(function() {
     //function to change values of selected country
     function countryClick(){
         $(".nav-option").click(function(event){
-            $('#bubbleContainer').empty();
+            $('#bubble-container').empty();
             countrySelected = event.target.id;
-            console.log(countrySelected);
+            //console.log(countrySelected);
             createBubbles(countrySelected);
         })
+    }
+
+    //loading gif while ajax sends
+    function loadingGif(){
+        $(document).ajaxSend(function(){
+            $(".cssload-container").css("display","block");
+        });
+        $(document).ajaxComplete(function(){
+            $(".cssload-container").css("display","none");
+        });
     }
 
     //set size of each bubble (min & max sizes)
@@ -139,7 +162,7 @@ $(document).ready(function() {
 
     function newsclose() {
         $("#cover").click(function (e) {
-              alert(activeHeight);
+            alert(activeHeight);
             var activeBubble = $(".bubble").not(".disabled")
             alert(activeBubble.text());
             activeBubble.addClass("x1");
@@ -151,10 +174,13 @@ $(document).ready(function() {
            });
     }
 
+    loadingGif();
     createCountry();
+    //createSideBar();
     countryClick();
     newsopen();
     newsclose();
+
 });
 
 
