@@ -12,8 +12,11 @@ $(document).ready(function() {
         {countryName: "England",
             countryCode: "england"},
         {countryName: "United States",
-            countryCode: "united states"}
+            countryCode: "usa"}
       ];
+
+    var countrySelected = "";
+    var headerCategory = "";
 
     //set category array
     var categories = ["entertainment","finance","tech","business","religion","media","sports","health","travel"];
@@ -35,22 +38,22 @@ $(document).ready(function() {
 
     //function to create random bubbles
     function createBubble(){
-        var numberOfBubble= 8;
+        var numberOfBubble= categories.length;
         for (var i = 0; i <numberOfBubble ; i++) {
             var mybubble = $('<div/>');
             var mybubblewrapper = $('<div/>');
-            var mybubbletext = $('<div/>');
-            mybubbletext.text("bubble"+i);
+            mybubble.text(categories[i]);
             mybubble.addClass('bubble x1');
+            mybubble.attr("id", categories[i]);
             mybubblewrapper.addClass("bubblewrapper col-md-2");
-            mybubble.css("background-color", "pink");
-            k=getRandomsize()
-            mybubble.css("width",k);
-            mybubble.css("height",k);
-            mybubble.css("vertical-align", "top");
-            mybubble.css("paddding-top", "50px");
-            mybubbletext.css("margin-top", "40%");
-            mybubble.append(mybubbletext);
+            k=getRandomsize();
+            mybubble.css({
+                width: k,
+                height: k,
+                verticalAlign: top,
+                paddingTop: "50px",
+                backgroundColor: "pink"
+            });
             mybubblewrapper.append(mybubble);
             $('#bubble-container').append(mybubblewrapper);
 
@@ -61,22 +64,41 @@ $(document).ready(function() {
             return size;
         }
     }
-
+    //function to change values of selected country
     function countryClick(){
-        $(this).click(function(event){
-            var country = event.target.id;
-            $.get("http://webhose.io/filterWebContent?token=261e9791-7278-4dfe-9339-93049307257c&format=json&ts=1500548708366&sort=crawled&q=language%3Aenglish%20site_type%3Anews%20social.facebook.likes%3A%3E5000%20location%3A"+ country +"%20site_category%3Apolitics",function(products) {
-                console.log(products);
-            })
-
+        $(".nav-option").click(function(event){
+            countrySelected = event.target.id;
+            console.log(countrySelected);
         })
+    }
+    //set headers according to country
+    function setHeaders() {
+        $(".bubble").hover(function (event) {
+            console.log(countrySelected);
+            
+            headerCategory = event.target.id;
+            console.log(headerCategory);
+                var headerTitle = $.get("http://webhose.io/filterWebContent?token=261e9791-7278-4dfe-9339-93049307257c&format=json&ts=1500561071414&sort=crawled&q=location%3A"+countrySelected+"%20performance_score%3A%3E9%20social.facebook.likes%3A%3E1000%20site_category%3A"+ headerCategory, function (data) {
+                    console.log(data);
+                    for(var i=0; i<3; i++){
+                        var headerContent = data.posts[i].title;
+                        console.log(headerContent);
+                    }
+                });
+            $(this).text(headerTitle);
+            }, function () {
+                $(this).text(this.id);
+
+            }
+        );
     }
 
 
-
-countryClick();
-createCountry();
 createBubble();
+    createCountry();
+    setHeaders();
+countryClick();
+
 });
 
 
