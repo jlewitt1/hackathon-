@@ -13,7 +13,7 @@ $(document).ready(function() {
             countryCode: "england"},
         {countryName: "United States",
             countryCode: "united states"}
-      ]; 
+      ];
 
     //set category array
     var categories = ["entertainment","finance","tech","business","religion","media","sports","health","travel"];

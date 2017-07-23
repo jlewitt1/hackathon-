@@ -16,15 +16,12 @@ body{
     margin: 0;
 }
 #bubble-container{
-    margin: 5%;
     width:100%;
     vertical-align: top;
-    display: inline-block;
 }
-
-.bubblewrapper{
-    width:100%;
-    display: inline-block;
+.bubblewrapper {
+    width: 100%;
+    display: inline;
 }
 .bubble{
     -webkit-border-radius: 50%;
@@ -37,6 +34,7 @@ body{
     display: inline-block;
     height: 200px;
     width: 200px;
+
 }
 
 
@@ -45,9 +43,6 @@ body{
     -webkit-animation: animateBubble 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
     -moz-animation: animateBubble 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
     animation: animateBubble 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
-
-
-
     -webkit-transform: scale(0.6);
     -moz-transform: scale(0.6);
     transform: scale(0.6);
