@@ -48,7 +48,7 @@ var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
                     console.log(data);
                         createBubble(data, category);
                 }); 
-            }, 700*i, category);
+            },1000*i, category);
       }
     }
 
@@ -59,6 +59,8 @@ var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
             var title = $('<h2>').text(category.toUpperCase());
             var content = $('<div>').addClass('content');
             for( var i = 0; i<3; i++){
+                var space = $('<span>').text('----');
+                content.append(space);
                 var article = $('<span>').text(data.posts[i].title);
                 content.append(article);
                 content.append($('<br>'))
@@ -93,10 +95,7 @@ var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
 
             $('#bubble-container').append(mybubblewrapper);
 
-            var counter = 0;
-            $(".bubble").hover(function (event) {
-            var bubble = $(event.target)
-        });
+       
     }
 
     //function to change values of selected country

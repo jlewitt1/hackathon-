@@ -17,17 +17,8 @@ body{
     font-family: 'Chicle', cursive;
     font-size: 18px;
 }
-a { 
-    font-family: 'Chicle', cursive;
-    font-size: 15px;
-    padding-bottom: 2px;
 
- }
 
-.wrapper { 
-    margin: 1%;
-
- }
 
 label { 
     margin-left: 4px;
@@ -151,7 +142,6 @@ button {
     background-color: rgba(0,0,0.3);
 }
  .goodNews{
-     display: inline-block;
      border: 1px solid black;
      font-size: 20px;
      width: 100px;
@@ -180,28 +170,28 @@ button {
 
 @-webkit-keyframes sideWays {
     0% {
-        margin-left:0px;
+        margin-left:-5px;
     }
     100% {
-        margin-left:5px;
+        margin-left:10px;
     }
 }
 
 @-moz-keyframes sideWays {
     0% {
-        margin-left:0px;
+        margin-left:-5px;
     }
     100% {
-        margin-left:5px;
+        margin-left:10px;
     }
 }
 
 @keyframes sideWays {
     0% {
-        margin-left:0px;
+        margin-left:-5px;
     }
     100% {
-        margin-left:5px;
+        margin-left:10px;
     }
 }
 
