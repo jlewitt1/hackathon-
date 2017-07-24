@@ -44,56 +44,17 @@ var token = "f9352120-c001-49ee-9467-62ef0ba3c6f7";
             window.setTimeout(function(category) {
                 $.get("http://webhose.io/filterWebContent?token="+token+"&format=json&ts=1500570230490&sort=crawled&q=location%3A"+countrySelected+"%20site_category%3A"+category,
                     function (data) {
+                    console.log(data);
                         createBubble(data, category);
                 }); 
             }, 700*i, category);
       }
     }
 
-
-    //function to create each individual bubble
-    // function createBubble(data, category){
-    //         var mybubble = $('<div/>');
-    //         var text = category;
-    //         text += "<br /><div class='content'>";
-    //             for( var i = 0; i<3; i++){
-    //                 var headerContent = data.posts[i].title;
-
-    //                 text += headerContent + '<br />';
-    //             };
-    //         text+="<div/>";
-    //         mybubble.html(text);
-    //         mybubble.addClass('bubble');
-    //         mybubble.attr("id", category);
-    //         mybubble.addClass("bubblewrapper");
-
-    //         var size = setBubbleSize(data.totalResults)/2;
-    //         mybubble.css({
-    //             width: size,
-    //             height: size,
-    //             paddingTop: "50px",
-    //             backgroundColor: "pink"
-    //         });
-
-    //         $('#bubble-container').append(mybubble);
-
-    //         var counter = 0;
-    //         $(".bubble").hover(function (event) {
-    //         var bubble = $(event.target);
-    //     });
-    // }
-
      //function to create each individual bubble
     function createBubble(data, category){
             var mybubble = $('<div/>');
             var mybubblewrapper = $('<div/>');
-            // var text = category.toUpperCase();
-            // text += "<br /><div class='content'>";
-            //     for( var i = 0; i<3; i++){
-            //         var headerContent = data.posts[i].title;
-            //         text += headerContent + '<br />';
-            //     };
-            // text+="<div/>";
             var title = $('<h2>').text(category.toUpperCase());
             var content = $('<div>').addClass('content');
             for( var i = 0; i<3; i++){
@@ -102,7 +63,7 @@ var token = "f9352120-c001-49ee-9467-62ef0ba3c6f7";
                 content.append($('<br>'))
             };
             mybubble.attr('data-popularity', data.totalResults);
-            mybubble.append(title)
+            mybubble.append(title);
             mybubble.append(content);
             mybubble.addClass('bubble x1');
             mybubble.attr("id", category);
@@ -133,8 +94,7 @@ var token = "f9352120-c001-49ee-9467-62ef0ba3c6f7";
 
             var counter = 0;
             $(".bubble").hover(function (event) {
-            var bubble = $(event.target);
-            bubble.css('z-index', counter+=1);
+            var bubble = $(event.target)
         });
     }
 
@@ -143,7 +103,6 @@ var token = "f9352120-c001-49ee-9467-62ef0ba3c6f7";
         $(".nav-option").click(function(event){
             $('#bubble-container').empty();
             countrySelected = event.target.id;
-            //console.log(countrySelected);
             createBubbles(countrySelected);
         })
     }
@@ -176,31 +135,29 @@ var token = "f9352120-c001-49ee-9467-62ef0ba3c6f7";
            e.stopPropagation();
            activeWidth=$(clickedBubble).width();
            activeHeight=$(clickedBubble).height();
-           console.log(activeWidth);
-           
+
            activex=$(clickedBubble).position().left;
            activey=$(clickedBubble).position().top;           
            var bubbleSize = Math.min($(window).width(), $(window).height());
-           console.log(bubbleSize);
            clickedBubble.addClass("activeBubble");
-           clickedBubble.css({"width":bubbleSize+"px","height":bubbleSize+"px","z-index":"12345","position":"fixed"});
+               clickedBubble.removeClass("x1");
+           clickedBubble.css({"z-index":"12345","width":bubbleSize+"px","height":bubbleSize+"px","z-index":"12345","position":"fixed"});
            $(".bubble").not(".activeBubble").addClass("disabled");
             $("#cover").css("display","block");
+
+
         });
     }
 
 function changeBackGround(){//change the theme of the pair
     $(".color").click(function(){
     color=this.id;
-    if(color=="random"){
-        bubbles= $(".bubble");
-        alert(bubbles.size());
-        for(var i = 0; i<bubbles.size(); i++) {;
-            bubbles[i].css("backgroundColor",getRandomColor());
+    if(color=="green"){
+        $(".bubble").css("backgroundColor", "#77dd77");
+        $(".content").css("color","black");
     }
-}
     else if(color=="blue"){
-        $(".bubble").css("backgroundColor",color);
+        $(".bubble").css("backgroundColor", "#99ccff");
         $(".content").css("color","white");
     }
     else{
@@ -216,7 +173,8 @@ function changeBackGround(){//change the theme of the pair
             $(".disabled").removeClass("disabled");
             $("#cover").css("display","none");
           
-           activeBubble.css({"width":activeHeight+"px","height":activeHeight+"px", "position":"inherit","z-index":"3","left":activex+"px", "transform": "translateX(-50%)"});
+           activeBubble.css({"zindex":"3","width":activeHeight+"px","height":activeHeight+"px", "position":"inherit","z-index":"3"});
+            $(".activeBubble").addClass("x1");
              $(".activeBubble").removeClass("activeBubble");
            });
     }
@@ -234,7 +192,6 @@ function changeBackGround(){//change the theme of the pair
     //createSideBar();
     countryClick();
 
-    newsopen();
     newsclose();
     changeBackGround();
     getRandomColor()
@@ -243,3 +200,4 @@ $(document).on("click", ".activeBubble", newsclose);
 
 
 });
+
