@@ -98,7 +98,7 @@ var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
        
     }
 
-    //function to change values of selected country
+    //function to change values of selected countryå
     function countryClick(){
         $(".nav-option").click(function(event){
             $('#bubble-container').empty();
@@ -106,9 +106,17 @@ var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
             $(".nav-option").removeClass("countrySelect");
             $(this).addClass("countrySelect");
             createBubbles(countrySelected);
+            });
 
+        }
+
+    function goodNewsClick(){
+        $(".goodNews").click(function () {
+            var snd = new Audio("./sounds/sounds.wav");
+            snd.play();
         })
     }
+
 
     //loading gif while ajax sends
     function loadingGif(){
@@ -134,6 +142,8 @@ var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
     function newsopen() {
   
            $(".bubble").click(function (e) {
+               var snd = new Audio("./sounds/pop.wav");
+               snd.play();
            var clickedBubble = $(this);
            e.stopPropagation();
            activeWidth=$(clickedBubble).width();
@@ -180,6 +190,8 @@ var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
     function newsclose() {
 
         $("#cover").click(function (e) {
+            var snd = new Audio("./sounds/pop.wav");
+            snd.play();
             var activeBubble = $(".activeBubble");
             $(".disabled").removeClass("disabled");
             $("#cover").css("display","none");
@@ -201,10 +213,10 @@ var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
     loadingGif();
     createCountry();
     countryClick();
-
     newsclose();
     changeBackGround();
-    getRandomColor()
+    getRandomColor();
+    goodNewsClick();
 $(document).on("click", ".bubble", newsopen);
 $(document).on("click", ".activeBubble", newsclose);
 
