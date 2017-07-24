@@ -1,5 +1,5 @@
 $(document).ready(function() {
-var token = "f9352120-c001-49ee-9467-62ef0ba3c6f7";
+var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
     //set country array
     var countries = [
         {countryName: "Australia",
@@ -35,6 +35,7 @@ var token = "f9352120-c001-49ee-9467-62ef0ba3c6f7";
         }
         $('.countries').append(navBar);
     }
+
 
     //function to create random bubbles
       function createBubbles(country){
@@ -103,7 +104,10 @@ var token = "f9352120-c001-49ee-9467-62ef0ba3c6f7";
         $(".nav-option").click(function(event){
             $('#bubble-container').empty();
             countrySelected = event.target.id;
+            $(".nav-option").removeClass("countrySelect");
+            $(this).addClass("countrySelect");
             createBubbles(countrySelected);
+
         })
     }
 
@@ -189,7 +193,6 @@ function changeBackGround(){//change the theme of the pair
 
     loadingGif();
     createCountry();
-    //createSideBar();
     countryClick();
 
     newsclose();
