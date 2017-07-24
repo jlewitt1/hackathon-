@@ -2,7 +2,6 @@
     padding:0;
     margin:0;
 }
-
 body{
     text-align: center;
     height: 100%;
@@ -17,30 +16,23 @@ body{
     font-family: 'Chicle', cursive;
     font-size: 18px;
 }
-
-
-
 label { 
     margin-left: 4px;
  }
-
 .instructions {
     font-size: 25px;
      text-shadow: 2px 2px 1px rgba(150, 150, 150, 1);
  }
-
  h1{
      text-shadow: 2px 2px 1px rgba(150, 150, 150, 1);
  }
  h4{
      text-shadow: 2px 2px 1px rgba(150, 150, 150, 1);
-
  }
  h2{
      font-size: 36px;
      font-family: 'chicle', sans-serif;
  }
-
  .content{
     font-size: 10px;
     height: 68%;
@@ -50,7 +42,6 @@ label {
     overflow: hidden;
     font-family: 'Lato', sans-serif;
 }
-
 .content span{
     display: block;
 }
@@ -62,7 +53,6 @@ label {
      margin-top: 2%;
 
  }
-
 #cover{
     background-color: gray;
     width: 100%;
@@ -72,7 +62,6 @@ label {
     z-index: 1234;
     opacity: 0.9;
 }
-
 .nav-option {
     display: inline-block;
     border: 1px solid black;
@@ -105,11 +94,9 @@ label {
 .bubble:hover{
     border: 3px solid white;
 }
-
 .bubble.disabled{
     pointer-events: none;
 }
-
 .bubble.full-screen {   
     z-index: 12345;
     left:50%;
@@ -124,14 +111,12 @@ label {
     -moz-transform: scale(0.6);
     transform: scale(0.6);
 }
-
 .activeBubble{
     position: fixed;
     left:50%;
     transform: translateX(-50%);
     top:40px
 }
-
 button { 
     width: 55px;
     height:40px;
@@ -153,7 +138,6 @@ button {
      background-color: powderblue;
      text-decoration: none;
  }
-
  .color{
      display: block;
      border: 1px solid black;
@@ -490,6 +474,10 @@ section#contact .text-danger {
 #green{
     background-color: #77dd77;
 }
+ #random{
+     background-image: url("https://c2.staticflickr.com/4/3591/3325782784_96776fc8b1_b.jpg");
+     background-size: cover;
+ }
  #country .countrySelect{
      box-shadow: 0px 0px 0px 5px black;
  }

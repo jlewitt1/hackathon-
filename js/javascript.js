@@ -152,23 +152,31 @@ var token = "4d9c3533-6b15-4bef-ba2c-4f211ffadd40";
         });
     }
 
-function changeBackGround(){//change the theme of the pair
-    $(".color").click(function(){
-    color=this.id;
-    if(color=="green"){
-        $(".bubble").css("backgroundColor", "#77dd77");
-        $(".content").css("color","black");
+    function changeBackGround(){//change the theme of the pair
+        $(".color").click(function(){
+            color=this.id;
+
+            if(color=="random"){
+                var bubbles= $(".bubble");
+                console.log(bubbles);
+                for(i = 0;i<bubbles.length;i++)
+                {$(bubbles[i]).css("backgroundColor",getRandomColor())}
+                $(".content").css("color","white");
+            }
+            else if(color=="blue"){
+                $(".bubble").css("backgroundColor", "#99ccff");
+                $(".content").css("color","white");
+            }
+            else if(color=="green"){
+                $(".bubble").css("backgroundColor", "#77dd77");
+                $(".content").css("color","white");
+            }
+            else{
+                $(".bubble").css("backgroundColor",color);
+                $(".content").css("color","black");
+            }
+        })
     }
-    else if(color=="blue"){
-        $(".bubble").css("backgroundColor", "#99ccff");
-        $(".content").css("color","white");
-    }
-    else{
-        $(".bubble").css("backgroundColor",color);
-        $(".content").css("color","black");
-        }  
-    })
-}
     function newsclose() {
 
         $("#cover").click(function (e) {
