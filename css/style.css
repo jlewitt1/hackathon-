@@ -1,36 +1,80 @@
+ *{
+    padding:0;
+    margin:0;
+}
+
 body{
     text-align: center;
     height: 100%;
     overflow-x: hidden;
     font-family: 'Chicle', cursive;
 }
+.theme{
+    position: absolute;
+    right: 8%;
+    top: 60px;
+    text-align: left;
+    font-family: 'Chicle', cursive;
+    font-size: 18px;
+}
+a { 
+    font-family: 'Chicle', cursive;
+    font-size: 15px;
+    padding-bottom: 2px;
 
- .instructions { 
-    font-size: 25px;
-    border-bottom: 1px solid black;
-    background-color: rgba(0,0,0,.1);
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+ }
+.wrapper { 
+    margin: 1%;
+
  }
 
- .row.top { 
-    background-color: rgba(0,0,0,.1);
-    border-top: 1px solid black;
-    margin-top: 1%;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-  }
+label { 
+    margin-left: 4px;
+ }
 
-  .row.countries { 
-    background-color: rgba(0,0,0,.1);
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-   }
+.instructions {
+    font-size: 25px;
+     text-shadow: 2px 2px 1px rgba(150, 150, 150, 1);
+ }
+
+ h1{
+     text-shadow: 2px 2px 1px rgba(150, 150, 150, 1);
+ }
+ h4{
+     text-shadow: 2px 2px 1px rgba(150, 150, 150, 1);
+
+ }
+ h2{
+     font-size: 36px;
+     font-family: 'chicle', sans-serif;
+ }
+
+ .content{
+    font-size: 10px;
+    height: 68%;
+    text-overflow: ellipsis;
+    width: 76%;
+    margin: 0 auto;
+    overflow: hidden;
+    font-family: 'Lato', sans-serif;
+}
+
+.content span{
+    display: block;
+}
+.row.top {
+    margin-top: 1%;
+}
+.row.main { 
+     margin-bottom: 6%;
+     margin-top: 2%;
+
+ }
 
 #cover{
     background-color: gray;
     width: 100%;
-    height: 100%;
+    height: 500%;
     position: absolute;
     display:none;
     z-index: 1234;
@@ -67,6 +111,9 @@ body{
     transition: all 1s linear;
     transform-origin: top left;
 }
+.bubble:hover{
+    border: 3px solid white;
+}
 
 .bubble.disabled{
     pointer-events: none;
@@ -85,6 +132,13 @@ body{
     -webkit-transform: scale(0.6);
     -moz-transform: scale(0.6);
     transform: scale(0.6);
+}
+
+.activeBubble{
+    position: fixed;
+    left:50%;
+    transform: translateX(-50%);
+    top:200px
 }
 
 button { 
@@ -126,9 +180,11 @@ button {
 
 section#contact {
     background-color: #222222;
-    background-image: url('http://artdnaswitchbd.com/componants/images/map-image.png');
+    background-image: url('http://orig04.deviantart.net/61d8/f/2016/166/e/3/groovy_background_by_danielfanbro850-da6cahp.jpg');
     background-position: center;
+    background-size: 100%;
     background-repeat: no-repeat;
+    margin-top: 13px;
 }
 section {
     padding: 30px 0PX;
@@ -148,7 +204,7 @@ section#contact .form-group input.form-control {
     height: auto;
 }
 section#contact .form-group textarea.form-control {
-    height: 236px;
+    height: 150px;
 }
 section#contact .form-control:focus {
     border-color: #fed136;
@@ -359,3 +415,65 @@ section#contact .text-danger {
     }
 }
 
+.nav-sidebar { 
+    width: 100%;
+    padding: 8px 0; 
+}
+.nav-sidebar a {
+    color: #333;
+    -webkit-transition: all 0.08s linear;
+    -moz-transition: all 0.08s linear;
+    -o-transition: all 0.08s linear;
+    transition: all 0.08s linear;
+    -webkit-border-radius: 4px 0 0 4px; 
+    -moz-border-radius: 4px 0 0 4px; 
+    border-radius: 4px 0 0 4px; 
+}
+.nav-sidebar .active a { 
+    cursor: default;
+    background-color: black; 
+    color: #fff; 
+    text-shadow: 1px 1px 1px #666; 
+}
+.nav-sidebar .active a:hover {
+    background-color: black;   
+}
+.nav-sidebar .text-overflow a,
+.nav-sidebar .text-overflow .media-body {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis; 
+}
+
+/* Right-aligned sidebar */
+.nav-sidebar.pull-right { 
+    border-right: 0; 
+    /*border-left: 1px solid #ddd; */
+}
+.nav-sidebar.pull-right a {
+    -webkit-border-radius: 0 4px 4px 0; 
+    -moz-border-radius: 0 4px 4px 0; 
+    border-radius: 0 4px 4px 0; 
+}
+
+.col-sm-2 { 
+    margin-bottom: -218px;
+    margin-top:10px;
+    margin-left: 1px;
+
+ }
+
+@media (max-width: 768px) {
+.col-sm-2 {
+    margin-bottom: 0px;
+    margin-top:10px;
+    margin-left: 1px;
+  }
+}
+
+@media (max-width: 1200px) {
+.theme {
+   right: 12%;
+  }
+}

@@ -1,8 +1,5 @@
-/**
- * Created by hillarosenberg on 2017/07/23.
- */
 $(document).ready(function() {
-var token = "fd0eb5f5-5906-4a6c-a1ef-905a0a07e241";
+var token = "f9352120-c001-49ee-9467-62ef0ba3c6f7";
     //set country array
     var countries = [
         {countryName: "Australia",
@@ -23,8 +20,7 @@ var token = "fd0eb5f5-5906-4a6c-a1ef-905a0a07e241";
 
     //set category array
     var categories = ["entertainment","finance","tech","business","religion","media","sports","health","travel","education"];
-    var images = ['australia','germany','england','israel','france','usa'];
-    // var sideOptions = ['Theme', 'Font','Favorites']
+    var images = ['australia','germany','england','france','israel','usa'];
 
     //function to create country buttons
     function createCountry() {
@@ -40,64 +36,97 @@ var token = "fd0eb5f5-5906-4a6c-a1ef-905a0a07e241";
         $('.countries').append(navBar);
     }
 
-    // function createSideBar () { 
-    //     var sideBar = $('<ul/>');
-    //     sideBar.attr('id', 'sidebar');
-
-    //     for (var i=0; i<sideOptions.length; i++) { 
-    //         var mySideItem = $('<button/>');
-    //         mySideItem.addClass('side-nav-option').attr('id',sideOptions[i]);
-    //         mySideItem.text(sideOptions[i]);
-
-    //         sideBar.append(mySideItem);
-    //     }
-    //     $('.container').append(sideBar)
-    // }
-
     //function to create random bubbles
-    function createBubbles(country){
+      function createBubbles(country){
         var numberOfBubble= categories.length;
         for (var i = 0; i <numberOfBubble ; i++) {
             var category = categories[i];
             window.setTimeout(function(category) {
-                console.log(category);
-                $.get("http://webhose.io/filterWebContent?token="+token+"&format=json&ts=1500570230490&sort=crawled&q=location%3A"+countrySelected+"%20site_category%3A"+category, 
+                $.get("http://webhose.io/filterWebContent?token="+token+"&format=json&ts=1500570230490&sort=crawled&q=location%3A"+countrySelected+"%20site_category%3A"+category,
                     function (data) {
-                        console.log(data);
                         createBubble(data, category);
                 }); 
             }, 700*i, category);
-             // window.setTimeout(function () { 
-             //    $('.instructions').hide();
-             // },1000);
       }
     }
 
+
     //function to create each individual bubble
+    // function createBubble(data, category){
+    //         var mybubble = $('<div/>');
+    //         var text = category;
+    //         text += "<br /><div class='content'>";
+    //             for( var i = 0; i<3; i++){
+    //                 var headerContent = data.posts[i].title;
+
+    //                 text += headerContent + '<br />';
+    //             };
+    //         text+="<div/>";
+    //         mybubble.html(text);
+    //         mybubble.addClass('bubble');
+    //         mybubble.attr("id", category);
+    //         mybubble.addClass("bubblewrapper");
+
+    //         var size = setBubbleSize(data.totalResults)/2;
+    //         mybubble.css({
+    //             width: size,
+    //             height: size,
+    //             paddingTop: "50px",
+    //             backgroundColor: "pink"
+    //         });
+
+    //         $('#bubble-container').append(mybubble);
+
+    //         var counter = 0;
+    //         $(".bubble").hover(function (event) {
+    //         var bubble = $(event.target);
+    //     });
+    // }
+
+     //function to create each individual bubble
     function createBubble(data, category){
             var mybubble = $('<div/>');
             var mybubblewrapper = $('<div/>');
-            var text = category;
-            text += "<br /><div class='content'>";
-                for( var i = 0; i<3; i++){
-                    var headerContent = data.posts[i].title;
-                    console.log(headerContent);
-                    text += headerContent + '<br />';
-                };
-            text+="<div/>";
-            mybubble.html(text);
+            // var text = category.toUpperCase();
+            // text += "<br /><div class='content'>";
+            //     for( var i = 0; i<3; i++){
+            //         var headerContent = data.posts[i].title;
+            //         text += headerContent + '<br />';
+            //     };
+            // text+="<div/>";
+            var title = $('<h2>').text(category.toUpperCase());
+            var content = $('<div>').addClass('content');
+            for( var i = 0; i<3; i++){
+                var article = $('<span>').text(data.posts[i].title);
+                content.append(article);
+                content.append($('<br>'))
+            };
+            mybubble.attr('data-popularity', data.totalResults);
+            mybubble.append(title)
+            mybubble.append(content);
             mybubble.addClass('bubble x1');
             mybubble.attr("id", category);
             mybubblewrapper.addClass("bubblewrapper col-md-2");
 
+
+            var fontsize = data.totalResults/50;
+            if(fontsize<18){
+                fontsize = 18
+            }
+            else if(fontsize>35){
+                fontsize = 35;
+            }
             var size = setBubbleSize(data.totalResults);
             mybubble.css({
                 width: size,
                 height: size,
                 paddingTop: "50px",
-                backgroundColor: "pink"
+                backgroundColor: "pink",
+                fontSize:fontsize + 'px'
+
             });
 
+            mybubble.find('.content').css({fontSize:fontsize + 'px'});
             mybubblewrapper.append(mybubble);
 
             $('#bubble-container').append(mybubblewrapper);
@@ -141,48 +170,76 @@ var token = "fd0eb5f5-5906-4a6c-a1ef-905a0a07e241";
     var activey;
     
     function newsopen() {
-        $(".bubble").click(function (e) {
-            
-           var clickedBubble = $(e.target);
+  
+           $(".bubble").click(function (e) {
+           var clickedBubble = $(this);
            e.stopPropagation();
-           activeWidth=$(e.target).width();
-           activeHeight=$(e.target).height();
+           activeWidth=$(clickedBubble).width();
+           activeHeight=$(clickedBubble).height();
            console.log(activeWidth);
            
-           activex=$(e.target).position().left;
-           activey=$(e.target).position().top;           
+           activex=$(clickedBubble).position().left;
+           activey=$(clickedBubble).position().top;           
            var bubbleSize = Math.min($(window).width(), $(window).height());
-           clickedBubble.css({"width":bubbleSize,"height":bubbleSize,"z-index": "12345", "position":"fixed","left":"50%", "transform": "translateX(-50%)","top":"200px"});
-            
-            clickedBubble.removeClass("x1");
-            $(".bubble.x1").addClass("disabled");
+           console.log(bubbleSize);
+           clickedBubble.addClass("activeBubble");
+           clickedBubble.css({"width":bubbleSize+"px","height":bubbleSize+"px","z-index":"12345","position":"fixed"});
+           $(".bubble").not(".activeBubble").addClass("disabled");
             $("#cover").css("display","block");
         });
     }
 
+function changeBackGround(){//change the theme of the pair
+    $(".color").click(function(){
+    color=this.id;
+    if(color=="random"){
+        bubbles= $(".bubble");
+        alert(bubbles.size());
+        for(var i = 0; i<bubbles.size(); i++) {;
+            bubbles[i].css("backgroundColor",getRandomColor());
+    }
+}
+    else if(color=="blue"){
+        $(".bubble").css("backgroundColor",color);
+        $(".content").css("color","white");
+    }
+    else{
+        $(".bubble").css("backgroundColor",color);
+        $(".content").css("color","black");
+        }  
+    })
+}
     function newsclose() {
+
         $("#cover").click(function (e) {
-            alert(activeHeight);
-            var activeBubble = $(".bubble").not(".disabled")
-            alert(activeBubble.text());
-            activeBubble.addClass("x1");
+            var activeBubble = $(".activeBubble");
             $(".disabled").removeClass("disabled");
             $("#cover").css("display","none");
-            console.log(activeHeight);
-
-           activeBubble.css({"width":activeHeight+"px","height":activeHeight+"px","z-index": "none", "position":"inherit","left":activex+"px", "transform": "translateX(-50%)","top":activey+"px"});
+          
+           activeBubble.css({"width":activeHeight+"px","height":activeHeight+"px", "position":"inherit","z-index":"3","left":activex+"px", "transform": "translateX(-50%)"});
+             $(".activeBubble").removeClass("activeBubble");
            });
     }
+    function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
     loadingGif();
     createCountry();
     //createSideBar();
     countryClick();
+
     newsopen();
     newsclose();
+    changeBackGround();
+    getRandomColor()
+$(document).on("click", ".bubble", newsopen);
+$(document).on("click", ".activeBubble", newsclose);
+
 
 });
-
-
-
-
